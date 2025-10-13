@@ -5,7 +5,7 @@ import AreaInputs from './inputForm/AreaInputs';
 import Button from './Button';
 import DateInputs from './inputForm/DateInputs';
 
-const TaskForm = ({ tasks, setTasks }) => {
+const TaskForm = ({ tasks, setTasks, isFormVisible, setIsFormVisible }) => {
 	const [taskForm, setTaskForm] = useState({
 		title: '',
 		dueDate: '',
@@ -45,62 +45,72 @@ const TaskForm = ({ tasks, setTasks }) => {
 			<h1 className="text-4xl font-bold text-white text-center mb-4 drop-shadow-lg">
 				Task Master
 			</h1>
-			<form onSubmit={handleSubmit} className="space-y-3">
-				<TextInputs
-					name="title"
-					label="Task Title"
-					value={taskForm.title}
-					onChange={handleFormChange}
-					required
-				/>
 
-				<DateInputs
-					label="Due Date"
-					name="dueDate"
-					onChange={handleFormChange}
-					value={taskForm.dueDate}
-					required
-				/>
+			<Button
+				className="w-full bg-gradient-to-r from-pink-500 to-purple-600 text-white font-bold py-3 px-6 rounded-lg hover:from-pink-600 hover:to-purple-700 hover:scale-105 hover:shadow-xl transition-all duration-300 mt-6"
+				onClick={() => setIsFormVisible(!isFormVisible)}
+			>
+				{isFormVisible ? '✖️Hide Form' : '➕ Add New Task'}
+			</Button>
 
-				<SelectInput
-					value={taskForm.priority}
-					label="Priority"
-					name="priority"
-					onChange={handleFormChange}
-					options={[
-						{ value: 'Low', label: '🟢 Low' },
-						{ value: 'Medium', label: '🟠 Medium' },
-						{ value: 'High', label: '🔴 High' },
-					]}
-				/>
+			{isFormVisible && (
+				<form onSubmit={handleSubmit} className="space-y-3">
+					<TextInputs
+						name="title"
+						label="Task Title"
+						value={taskForm.title}
+						onChange={handleFormChange}
+						required
+					/>
 
-				<SelectInput
-					value={taskForm.category}
-					label="Category"
-					name="category"
-					onChange={handleFormChange}
-					options={[
-						{ value: 'Work', label: '📁 Work' },
-						{ value: 'Personal', label: '🏠 Personal' },
-						{ value: 'Shopping', label: '🛒 Shopping' },
-						{ value: 'Health', label: '🧑🏻‍⚕️ Health' },
-						{ value: 'Ideas', label: '💡 Ideas' },
-						{ value: 'Others', label: '💭 Others' },
-					]}
-				/>
+					<DateInputs
+						label="Due Date"
+						name="dueDate"
+						onChange={handleFormChange}
+						value={taskForm.dueDate}
+						required
+					/>
 
-				<AreaInputs
-					value={taskForm.description}
-					label="Description"
-					name="description"
-					onChange={handleFormChange}
-					required
-				/>
+					<SelectInput
+						value={taskForm.priority}
+						label="Priority"
+						name="priority"
+						onChange={handleFormChange}
+						options={[
+							{ value: 'Low', label: '🟢 Low' },
+							{ value: 'Medium', label: '🟠 Medium' },
+							{ value: 'High', label: '🔴 High' },
+						]}
+					/>
 
-				<Button className="w-full bg-gradient-to-r from-pink-500 to-purple-600 text-white font-bold py-3 px-6 rounded-lg hover:from-pink-600 hover:to-purple-700 hover:scale-105 hover:shadow-xl transition-all duration-300 mt-6">
-					Add Task
-				</Button>
-			</form>
+					<SelectInput
+						value={taskForm.category}
+						label="Category"
+						name="category"
+						onChange={handleFormChange}
+						options={[
+							{ value: 'Work', label: '📁 Work' },
+							{ value: 'Personal', label: '🏠 Personal' },
+							{ value: 'Shopping', label: '🛒 Shopping' },
+							{ value: 'Health', label: '🧑🏻‍⚕️ Health' },
+							{ value: 'Ideas', label: '💡 Ideas' },
+							{ value: 'Others', label: '💭 Others' },
+						]}
+					/>
+
+					<AreaInputs
+						value={taskForm.description}
+						label="Description"
+						name="description"
+						onChange={handleFormChange}
+						required
+					/>
+
+					<Button className="w-full bg-gradient-to-r from-pink-500 to-purple-600 text-white font-bold py-3 px-6 rounded-lg hover:from-pink-600 hover:to-purple-700 hover:scale-105 hover:shadow-xl transition-all duration-300 mt-6">
+						Add Task
+					</Button>
+				</form>
+			)}
 		</div>
 	);
 };

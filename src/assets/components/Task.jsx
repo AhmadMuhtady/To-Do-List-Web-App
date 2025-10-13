@@ -3,8 +3,10 @@ import Button from './Button';
 const Task = () => {
 	return (
 		<div
-			className="bg-white/10
-backdrop-blur-lg rounded-xl p-5 border border-white/20 shadow-lg hover:shadow-2xl hover:border-white/30 transition-all "
+			className="bg-[#3a3f73]/70 border border-blue-400/20 rounded-2xl p-6 
+	shadow-[0_4px_20px_rgba(0,0,50,0.25)] hover:shadow-[0_8px_30px_rgba(80,120,255,0.35)] 
+	hover:bg-[#4b52a0]/80 transition-all duration-300 
+	backdrop-blur-md hover:-translate-y-1 group"
 		>
 			<div className="flex items-center justify-between">
 				<div className="flex items-center gap-3">
