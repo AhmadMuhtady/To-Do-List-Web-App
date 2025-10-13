@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import TextInputs from './inputForm/TextInputs';
-import SelectInput from './inputForm/SelectedInputs';
+import SelectInput from './inputForm/SelectInput';
 import AreaInputs from './inputForm/AreaInputs';
 import Button from './Button';
 import DateInputs from './inputForm/DateInputs';
@@ -9,8 +9,8 @@ const TaskForm = ({ tasks, setTasks, isFormVisible, setIsFormVisible }) => {
 	const [taskForm, setTaskForm] = useState({
 		title: '',
 		dueDate: '',
-		priority: 'Medium',
-		category: 'Work',
+		priority: '🟠 Medium',
+		category: '📁 Work',
 		description: '',
 	});
 	const taskIdRef = useRef(null);
@@ -26,6 +26,7 @@ const TaskForm = ({ tasks, setTasks, isFormVisible, setIsFormVisible }) => {
 
 		if (!taskForm.title || !taskForm.dueDate || !taskForm.description) {
 			alert('Please fill All Fields');
+			return;
 		}
 
 		taskIdRef.current = crypto.randomUUID();
@@ -36,8 +37,8 @@ const TaskForm = ({ tasks, setTasks, isFormVisible, setIsFormVisible }) => {
 		setTaskForm({
 			title: '',
 			dueDate: '',
-			priority: 'Medium',
-			category: 'Work',
+			priority: '🟠 Medium',
+			category: '📁 Work',
 			description: '',
 		});
 	};
