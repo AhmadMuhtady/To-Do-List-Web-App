@@ -1,12 +1,22 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 import TaskForm from './assets/components/TaskForm';
 import TaskList from './assets/components/TaskList';
 
 const App = () => {
+	const topRef = useRef(null);
+	const [taskForm, setTaskForm] = useState({
+		title: '',
+		dueDate: '',
+		priority: 'Medium',
+		category: 'Work',
+		description: '',
+	});
 	const [tasks, setTasks] = useState([]);
 	const [isFormVisible, setIsFormVisible] = useState(false);
 	const [isTasksVisible, setIsTasksVisible] = useState(false);
+	const [isEditing, setIsEditing] = useState(false);
+	const [editingTaskId, setEditingTaskId] = useState(null); // optional: track which task is being edited
 
 	const deleteTask = (id) => {
 		const confirm = window.confirm(
@@ -16,6 +26,18 @@ const App = () => {
 			setTasks(tasks.filter((task) => task.id !== id));
 		}
 	};
+
+	const editTask = (id) => {
+		const taskToEdit = tasks.find((task) => task.id === id);
+		if (taskToEdit) {
+			setTaskForm({ ...taskToEdit });
+			setIsEditing(true);
+			setEditingTaskId(id);
+			setIsFormVisible(true);
+			topRef.current?.scrollIntoView({ behavior: 'smooth' });
+		}
+	};
+
 	return (
 		<div className="min-h-screen bg-gradient-to-br from-purple-900 via-indigo-800 to-blue-900 flex justify-center py-12 px-8">
 			<div className="w-full max-w-5xl">
@@ -24,6 +46,12 @@ const App = () => {
 					setTasks={setTasks}
 					isFormVisible={isFormVisible}
 					setIsFormVisible={setIsFormVisible}
+					setTaskForm={setTaskForm}
+					taskForm={taskForm}
+					isEditing={isEditing}
+					setIsEditing={setIsEditing}
+					editingTaskId={editingTaskId}
+					topRef={topRef}
 				/>
 				<TaskList
 					tasks={tasks}
@@ -31,6 +59,7 @@ const App = () => {
 					isTasksVisible={isTasksVisible}
 					setIsTasksVisible={setIsTasksVisible}
 					deleteTask={deleteTask}
+					editTask={editTask}
 				/>
 			</div>
 		</div>

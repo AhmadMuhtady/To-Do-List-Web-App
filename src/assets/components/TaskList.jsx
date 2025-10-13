@@ -7,6 +7,7 @@ const TaskList = ({
 	isTasksVisible,
 	setIsTasksVisible,
 	deleteTask,
+	editTask,
 }) => {
 	if (tasks.length === 0) {
 		return (
@@ -36,7 +37,12 @@ border border-white/10"
 			{isTasksVisible && (
 				<div className="space-y-4 mt-3">
 					{tasks.map((task) => (
-						<Task key={task.id} task={task} deleteTask={deleteTask} />
+						<Task
+							key={task.id}
+							task={task}
+							deleteTask={deleteTask}
+							editTask={editTask}
+						/>
 					))}
 				</div>
 			)}

@@ -5,14 +5,19 @@ import AreaInputs from './inputForm/AreaInputs';
 import Button from './Button';
 import DateInputs from './inputForm/DateInputs';
 
-const TaskForm = ({ tasks, setTasks, isFormVisible, setIsFormVisible }) => {
-	const [taskForm, setTaskForm] = useState({
-		title: '',
-		dueDate: '',
-		priority: 'Medium',
-		category: 'Work',
-		description: '',
-	});
+const TaskForm = ({
+	tasks,
+	setTasks,
+	isFormVisible,
+	setIsFormVisible,
+	taskForm,
+	setTaskForm,
+	isEditing,
+	setIsEditing,
+	editingTaskId,
+	setEditingTaskId,
+	topRef,
+}) => {
 	const taskIdRef = useRef(null);
 	const handleFormChange = (e) => {
 		setTaskForm({
@@ -24,16 +29,20 @@ const TaskForm = ({ tasks, setTasks, isFormVisible, setIsFormVisible }) => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
-		if (!taskForm.title || !taskForm.dueDate || !taskForm.description) {
-			alert('Please fill All Fields');
-			return;
+		if (isEditing) {
+			// Update existing task
+			setTasks((prev) =>
+				prev.map((task) =>
+					task.id === editingTaskId ? { ...taskForm, id: editingTaskId } : task
+				)
+			);
+		} else {
+			// Create new task
+			const newTask = { ...taskForm, id: Date.now() };
+			setTasks((prev) => [...prev, newTask]);
 		}
 
-		taskIdRef.current = crypto.randomUUID();
-		const newTask = { id: taskIdRef.current, ...taskForm };
-
-		setTasks([newTask, ...tasks]);
-
+		// Reset form
 		setTaskForm({
 			title: '',
 			dueDate: '',
@@ -41,7 +50,11 @@ const TaskForm = ({ tasks, setTasks, isFormVisible, setIsFormVisible }) => {
 			category: 'Work',
 			description: '',
 		});
+		setIsEditing(false);
+		setEditingTaskId(null);
+		setIsFormVisible(false);
 	};
+
 	return (
 		<div className="bg-white/10  backdrop-blur-lg rounded-2xl p-8 shadow-2xl border border-white/20">
 			<h1 className="text-4xl font-bold text-white text-center mb-4 drop-shadow-lg">
@@ -56,7 +69,7 @@ const TaskForm = ({ tasks, setTasks, isFormVisible, setIsFormVisible }) => {
 			</Button>
 
 			{isFormVisible && (
-				<form onSubmit={handleSubmit} className="space-y-3">
+				<form ref={topRef} onSubmit={handleSubmit} className="space-y-3">
 					<TextInputs
 						name="title"
 						label="Task Title"
@@ -109,7 +122,7 @@ const TaskForm = ({ tasks, setTasks, isFormVisible, setIsFormVisible }) => {
 					/>
 
 					<Button className="w-full bg-gradient-to-r from-pink-500 to-purple-600 text-white font-bold py-3 px-6 rounded-lg hover:from-pink-600 hover:to-purple-700 hover:scale-105 hover:shadow-xl transition-all duration-300 mt-6">
-						Add Task
+						{isEditing ? 'Update Task' : 'Add Task'}
 					</Button>
 				</form>
 			)}
