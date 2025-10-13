@@ -1,6 +1,6 @@
 import Button from './Button';
 
-const Task = () => {
+const Task = ({ task }) => {
 	return (
 		<div
 			className="bg-[#3a3f73]/70 border border-blue-400/20 rounded-2xl p-6 
@@ -10,23 +10,21 @@ const Task = () => {
 		>
 			<div className="flex items-center justify-between">
 				<div className="flex items-center gap-3">
-					<span className="text-lg font-semibold text-white">
-						Build an awesome todo app
-					</span>
+					<span className="text-lg font-semibold text-white">{task.title}</span>
 				</div>
 				<span className="bg-red-500/20 text-red-300 px-3 py-1 rounded-full text-xs font-medium">
-					🔴 High
+					{task.priority}
 				</span>
 			</div>
 
 			<p className="text-white/90 text-sm mt-2 mb-3 leading-relaxed">
-				Learn React and Tailwind while creating something beautiful
+				{task.description}
 			</p>
 
 			<div className="flex items-center gap-4 text-sm text-white/90 mb-3">
-				<span>📅 Oct 15, 2025</span>
+				<span>📅 {task.dueDate}</span>
 				<span>|</span>
-				<span>📁 Work</span>
+				<span>{task.category}</span>
 			</div>
 
 			<div className="flex justify-end gap-2 ">

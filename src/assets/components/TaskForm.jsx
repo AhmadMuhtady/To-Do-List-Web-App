@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import TextInputs from './inputForm/TextInputs';
 import SelectInput from './inputForm/SelectedInputs';
 import AreaInputs from './inputForm/AreaInputs';
@@ -13,7 +13,7 @@ const TaskForm = ({ tasks, setTasks, isFormVisible, setIsFormVisible }) => {
 		category: 'Work',
 		description: '',
 	});
-
+	const taskIdRef = useRef(null);
 	const handleFormChange = (e) => {
 		setTaskForm({
 			...taskForm,
@@ -28,7 +28,8 @@ const TaskForm = ({ tasks, setTasks, isFormVisible, setIsFormVisible }) => {
 			alert('Please fill All Fields');
 		}
 
-		const newTask = { id: crypto.randomUUID(), ...taskForm };
+		taskIdRef.current = crypto.randomUUID();
+		const newTask = { id: taskIdRef.current, ...taskForm };
 
 		setTasks([newTask, ...tasks]);
 
@@ -77,9 +78,9 @@ const TaskForm = ({ tasks, setTasks, isFormVisible, setIsFormVisible }) => {
 						name="priority"
 						onChange={handleFormChange}
 						options={[
-							{ value: 'Low', label: '🟢 Low' },
-							{ value: 'Medium', label: '🟠 Medium' },
-							{ value: 'High', label: '🔴 High' },
+							{ value: '🟢 Low', label: '🟢 Low' },
+							{ value: '🟠 Medium', label: '🟠 Medium' },
+							{ value: '🔴 High', label: '🔴 High' },
 						]}
 					/>
 
@@ -89,12 +90,12 @@ const TaskForm = ({ tasks, setTasks, isFormVisible, setIsFormVisible }) => {
 						name="category"
 						onChange={handleFormChange}
 						options={[
-							{ value: 'Work', label: '📁 Work' },
-							{ value: 'Personal', label: '🏠 Personal' },
-							{ value: 'Shopping', label: '🛒 Shopping' },
-							{ value: 'Health', label: '🧑🏻‍⚕️ Health' },
-							{ value: 'Ideas', label: '💡 Ideas' },
-							{ value: 'Others', label: '💭 Others' },
+							{ value: '📁 Work', label: '📁 Work' },
+							{ value: '🏠 Personal', label: '🏠 Personal' },
+							{ value: '🛒 Shopping', label: '🛒 Shopping' },
+							{ value: '🧑🏻‍⚕️ Health', label: '🧑🏻‍⚕️ Health' },
+							{ value: '💡 Ideas', label: '💡 Ideas' },
+							{ value: '💭 Others', label: '💭 Others' },
 						]}
 					/>
 

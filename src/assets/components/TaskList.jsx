@@ -23,7 +23,7 @@ border border-white/10"
 			{isTasksVisible && (
 				<div className="space-y-4 mt-3">
 					{tasks.map((task) => (
-						<Task />
+						<Task key={task.id} task={task} />
 					))}
 				</div>
 			)}
