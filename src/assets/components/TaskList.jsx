@@ -1,7 +1,13 @@
 import Task from './Task';
 import Button from './Button';
 
-const TaskList = ({ tasks, setTasks, isTasksVisible, setIsTasksVisible }) => {
+const TaskList = ({
+	tasks,
+	setTasks,
+	isTasksVisible,
+	setIsTasksVisible,
+	deleteTask,
+}) => {
 	if (tasks.length === 0) {
 		return (
 			<p className="text-center text-white/90 text-sm mt-2 mb-3 leading-relaxed">
@@ -30,7 +36,7 @@ border border-white/10"
 			{isTasksVisible && (
 				<div className="space-y-4 mt-3">
 					{tasks.map((task) => (
-						<Task key={task.id} task={task} />
+						<Task key={task.id} task={task} deleteTask={deleteTask} />
 					))}
 				</div>
 			)}

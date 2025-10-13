@@ -1,6 +1,6 @@
 import Button from './Button';
 
-const Task = ({ task }) => {
+const Task = ({ task, deleteTask }) => {
 	const getPriorityDisplay = (priority) => {
 		const map = {
 			Low: '🟢 Low',
@@ -51,7 +51,10 @@ const Task = ({ task }) => {
 				<Button className="bg-blue-500/20 hover:bg-blue-500/30 text-white/90 px-3 py-1.5 rounded-lg text-sm transition-all hover:scale-105">
 					✏️ Edit
 				</Button>
-				<Button className="bg-red-500/20 hover:bg-red-500/30 text-white/90 px-3 py-1.5 rounded-lg text-sm transition-all hover:scale-105">
+				<Button
+					onClick={() => deleteTask(task.id)}
+					className="bg-red-500/20 hover:bg-red-500/30 text-white/90 px-3 py-1.5 rounded-lg text-sm transition-all hover:scale-105"
+				>
 					🗑️ Delete
 				</Button>
 				<Button className="bg-green-500/20 hover:bg-green-500/30 text-white/90 px-3 py-1.5 rounded-lg text-sm transition-all hover:scale-105">
