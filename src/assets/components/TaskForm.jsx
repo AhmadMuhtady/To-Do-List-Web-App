@@ -9,8 +9,8 @@ const TaskForm = ({ tasks, setTasks, isFormVisible, setIsFormVisible }) => {
 	const [taskForm, setTaskForm] = useState({
 		title: '',
 		dueDate: '',
-		priority: '🟠 Medium',
-		category: '📁 Work',
+		priority: 'Medium',
+		category: 'Work',
 		description: '',
 	});
 	const taskIdRef = useRef(null);
@@ -37,8 +37,8 @@ const TaskForm = ({ tasks, setTasks, isFormVisible, setIsFormVisible }) => {
 		setTaskForm({
 			title: '',
 			dueDate: '',
-			priority: '🟠 Medium',
-			category: '📁 Work',
+			priority: 'Medium',
+			category: 'Work',
 			description: '',
 		});
 	};
@@ -79,9 +79,9 @@ const TaskForm = ({ tasks, setTasks, isFormVisible, setIsFormVisible }) => {
 						name="priority"
 						onChange={handleFormChange}
 						options={[
-							{ value: 'Low', label: '🟢 Low' },
-							{ value: 'Medium', label: '🟠 Medium' },
 							{ value: 'High', label: '🔴 High' },
+							{ value: 'Medium', label: '🟠 Medium' },
+							{ value: 'Low', label: '🟢 Low' },
 						]}
 					/>
 

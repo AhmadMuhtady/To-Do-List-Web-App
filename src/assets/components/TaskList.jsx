@@ -2,6 +2,13 @@ import Task from './Task';
 import Button from './Button';
 
 const TaskList = ({ tasks, setTasks, isTasksVisible, setIsTasksVisible }) => {
+	if (tasks.length === 0) {
+		return (
+			<p className="text-center text-white/90 text-sm mt-2 mb-3 leading-relaxed">
+				No Tasks Yet
+			</p>
+		);
+	}
 	return (
 		<div
 			className="w-full bg-gradient-to-r from-blue-500/40 via-indigo-500/40 to-purple-600/40 
