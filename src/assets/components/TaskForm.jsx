@@ -3,10 +3,12 @@ import TextInputs from './inputForm/TextInputs';
 import SelectInput from './inputForm/SelectedInputs';
 import AreaInputs from './inputForm/AreaInputs';
 import Button from './Button';
+import DateInputs from './inputForm/DateInputs';
 
 const TaskForm = () => {
 	const [taskForm, setTaskForm] = useState({
 		title: '',
+		dueDate: '',
 		priority: 'Medium',
 		category: 'Work',
 		description: '',
@@ -14,22 +16,29 @@ const TaskForm = () => {
 
 	const handleFormChange = (e) => {
 		setTaskForm({
-			...TaskForm,
+			...taskForm,
 			[e.target.name]: e.target.value,
 		});
 	};
 	return (
-		<div>
-			<h1 className="text-3xl font-bold text-white text-center mb-12">
+		<div className="bg-white/10  backdrop-blur-lg rounded-2xl p-8 shadow-2xl border border-white/20">
+			<h1 className="text-4xl font-bold text-white text-center mb-4 drop-shadow-lg">
 				Task Master
 			</h1>
-
-			<form className="mb-6">
+			<form className="space-y-3">
 				<TextInputs
 					name="title"
 					label="Task Title"
 					value={taskForm.title}
 					onChange={handleFormChange}
+					required
+				/>
+
+				<DateInputs
+					label="Due Date"
+					name="dueDate"
+					onChange={handleFormChange}
+					value={taskForm.dueDate}
 					required
 				/>
 
@@ -67,7 +76,9 @@ const TaskForm = () => {
 					required
 				/>
 
-				<Button>Add Task</Button>
+				<Button className="w-full bg-gradient-to-r from-pink-500 to-purple-600 text-white font-bold py-3 px-6 rounded-lg hover:from-pink-600 hover:to-purple-700 hover:scale-105 hover:shadow-xl transition-all duration-300 mt-6">
+					Add Task
+				</Button>
 			</form>
 		</div>
 	);
