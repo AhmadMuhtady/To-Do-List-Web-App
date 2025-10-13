@@ -79,9 +79,9 @@ const TaskForm = ({ tasks, setTasks, isFormVisible, setIsFormVisible }) => {
 						name="priority"
 						onChange={handleFormChange}
 						options={[
-							{ value: '🟢 Low', label: '🟢 Low' },
-							{ value: '🟠 Medium', label: '🟠 Medium' },
-							{ value: '🔴 High', label: '🔴 High' },
+							{ value: 'Low', label: '🟢 Low' },
+							{ value: 'Medium', label: '🟠 Medium' },
+							{ value: 'High', label: '🔴 High' },
 						]}
 					/>
 
@@ -91,12 +91,12 @@ const TaskForm = ({ tasks, setTasks, isFormVisible, setIsFormVisible }) => {
 						name="category"
 						onChange={handleFormChange}
 						options={[
-							{ value: '📁 Work', label: '📁 Work' },
-							{ value: '🏠 Personal', label: '🏠 Personal' },
-							{ value: '🛒 Shopping', label: '🛒 Shopping' },
-							{ value: '🧑🏻‍⚕️ Health', label: '🧑🏻‍⚕️ Health' },
-							{ value: '💡 Ideas', label: '💡 Ideas' },
-							{ value: '💭 Others', label: '💭 Others' },
+							{ value: 'Work', label: '📁 Work' },
+							{ value: 'Personal', label: '🏠 Personal' },
+							{ value: 'Shopping', label: '🛒 Shopping' },
+							{ value: 'Health', label: '🧑🏻‍⚕️ Health' },
+							{ value: 'Ideas', label: '💡 Ideas' },
+							{ value: 'Others', label: '💭 Others' },
 						]}
 					/>
 

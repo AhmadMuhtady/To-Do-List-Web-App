@@ -17,7 +17,7 @@ border border-white/10"
 				className="w-full bg-gradient-to-r from-pink-500 to-purple-600 text-white font-bold py-3 px-6 rounded-lg hover:from-pink-600 hover:to-purple-700 hover:scale-105 hover:shadow-xl transition-all duration-300 mt-6"
 				onClick={() => setIsTasksVisible(!isTasksVisible)}
 			>
-				{isTasksVisible ? '🕶️Hide Tasks' : '👀 View Tasks'}
+				{isTasksVisible ? '🕶️ Hide Tasks' : '👀 View Tasks'}
 			</Button>
 
 			{isTasksVisible && (
