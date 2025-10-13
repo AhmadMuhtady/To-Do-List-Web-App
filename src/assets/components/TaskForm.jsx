@@ -79,9 +79,9 @@ const TaskForm = ({ tasks, setTasks, isFormVisible, setIsFormVisible }) => {
 						name="priority"
 						onChange={handleFormChange}
 						options={[
-							{ value: 'High', label: '🔴 High' },
-							{ value: 'Medium', label: '🟠 Medium' },
 							{ value: 'Low', label: '🟢 Low' },
+							{ value: 'Medium', label: '🟠 Medium' },
+							{ value: 'High', label: '🔴 High' },
 						]}
 					/>
 
