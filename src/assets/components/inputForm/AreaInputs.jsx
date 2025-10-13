@@ -1,4 +1,4 @@
-const AreaInputs = ({ name, label, onChange, required = false }) => {
+const AreaInputs = ({ name, value, label, onChange, required = false }) => {
 	return (
 		<div>
 			<label
@@ -12,6 +12,7 @@ const AreaInputs = ({ name, label, onChange, required = false }) => {
 				name={name}
 				onChange={onChange}
 				required={required}
+				value={value}
 			></textarea>
 		</div>
 	);

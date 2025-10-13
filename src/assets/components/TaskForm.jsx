@@ -5,7 +5,7 @@ import AreaInputs from './inputForm/AreaInputs';
 import Button from './Button';
 import DateInputs from './inputForm/DateInputs';
 
-const TaskForm = () => {
+const TaskForm = ({ tasks, setTasks }) => {
 	const [taskForm, setTaskForm] = useState({
 		title: '',
 		dueDate: '',
@@ -13,9 +13,6 @@ const TaskForm = () => {
 		category: 'Work',
 		description: '',
 	});
-	const [tasks, setTasks] = useState([]);
-
-	console.log(tasks);
 
 	const handleFormChange = (e) => {
 		setTaskForm({
