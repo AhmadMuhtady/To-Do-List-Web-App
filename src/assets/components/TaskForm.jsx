@@ -13,6 +13,9 @@ const TaskForm = () => {
 		category: 'Work',
 		description: '',
 	});
+	const [tasks, setTasks] = useState([]);
+
+	console.log(tasks);
 
 	const handleFormChange = (e) => {
 		setTaskForm({
@@ -20,12 +23,32 @@ const TaskForm = () => {
 			[e.target.name]: e.target.value,
 		});
 	};
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+
+		if (!taskForm.title || !taskForm.dueDate || !taskForm.description) {
+			alert('Please fill All Fields');
+		}
+
+		const newTask = { id: crypto.randomUUID(), ...taskForm };
+
+		setTasks([newTask, ...tasks]);
+
+		setTaskForm({
+			title: '',
+			dueDate: '',
+			priority: 'Medium',
+			category: 'Work',
+			description: '',
+		});
+	};
 	return (
 		<div className="bg-white/10  backdrop-blur-lg rounded-2xl p-8 shadow-2xl border border-white/20">
 			<h1 className="text-4xl font-bold text-white text-center mb-4 drop-shadow-lg">
 				Task Master
 			</h1>
-			<form className="space-y-3">
+			<form onSubmit={handleSubmit} className="space-y-3">
 				<TextInputs
 					name="title"
 					label="Task Title"
@@ -70,6 +93,7 @@ const TaskForm = () => {
 				/>
 
 				<AreaInputs
+					value={taskForm.description}
 					label="Description"
 					name="description"
 					onChange={handleFormChange}
