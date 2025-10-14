@@ -40,6 +40,7 @@ const TaskForm = ({
 			// Create new task
 			const newTask = { ...taskForm, id: Date.now() };
 			setTasks((prev) => [...prev, newTask]);
+			console.log();
 		}
 
 		// Reset form
@@ -49,6 +50,7 @@ const TaskForm = ({
 			priority: 'Medium',
 			category: 'Work',
 			description: '',
+			completed: false,
 		});
 		setIsEditing(false);
 		setEditingTaskId(null);
@@ -56,8 +58,8 @@ const TaskForm = ({
 	};
 
 	return (
-		<div className="bg-white/10  backdrop-blur-lg rounded-2xl p-8 shadow-2xl border border-white/20">
-			<h1 className="text-4xl font-bold text-white text-center mb-4 drop-shadow-lg">
+		<div className="bg-white/10 backdrop-blur-md rounded-xl p-8 shadow-lg border border-white/20">
+			<h1 className="text-3xl font-bold text-center text-cyan-400 mb-6">
 				Task Master
 			</h1>
 
@@ -69,7 +71,7 @@ const TaskForm = ({
 			</Button>
 
 			{isFormVisible && (
-				<form ref={topRef} onSubmit={handleSubmit} className="space-y-3">
+				<form ref={topRef} onSubmit={handleSubmit} className="space-y-4">
 					<TextInputs
 						name="title"
 						label="Task Title"
@@ -121,7 +123,7 @@ const TaskForm = ({
 						required
 					/>
 
-					<Button className="w-full bg-gradient-to-r from-pink-500 to-purple-600 text-white font-bold py-3 px-6 rounded-lg hover:from-pink-600 hover:to-purple-700 hover:scale-105 hover:shadow-xl transition-all duration-300 mt-6">
+					<Button className="w-full bg-cyan-500 hover:bg-cyan-600 text-white font-semibold py-3 rounded-lg transition-all duration-300 shadow-md hover:shadow-xl">
 						{isEditing ? 'Update Task' : 'Add Task'}
 					</Button>
 				</form>

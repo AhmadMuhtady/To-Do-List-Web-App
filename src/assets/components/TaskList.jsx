@@ -8,6 +8,7 @@ const TaskList = ({
 	setIsTasksVisible,
 	deleteTask,
 	editTask,
+	toggleComplete,
 }) => {
 	if (tasks.length === 0) {
 		return (
@@ -17,14 +18,9 @@ const TaskList = ({
 		);
 	}
 	return (
-		<div
-			className="w-full bg-gradient-to-r from-blue-500/40 via-indigo-500/40 to-purple-600/40 
-text-white font-bold py-8 px-6 rounded-2xl mt-6 
-backdrop-blur-lg shadow-[0_4px_25px_rgba(0,0,50,0.3)] 
-border border-white/10"
-		>
-			<h2 className="text-4xl font-bold text-white text-center mb-4 drop-shadow-lg ">
-				Your Tasks
+		<div className="bg-white/5 backdrop-blur-md rounded-xl p-8 shadow-lg border border-white/10">
+			<h2 className="text-3xl font-bold text-center text-magenta-400 mb-6">
+				📋 Your Tasks
 			</h2>
 
 			<Button
@@ -35,13 +31,14 @@ border border-white/10"
 			</Button>
 
 			{isTasksVisible && (
-				<div className="space-y-4 mt-3">
+				<div className="mt-6 space-y-4">
 					{tasks.map((task) => (
 						<Task
 							key={task.id}
 							task={task}
 							deleteTask={deleteTask}
 							editTask={editTask}
+							toggleComplete={toggleComplete}
 						/>
 					))}
 				</div>
