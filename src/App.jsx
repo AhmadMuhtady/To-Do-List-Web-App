@@ -47,9 +47,29 @@ const App = () => {
 		);
 	};
 
+	const getPriorityDisplay = (priority) => {
+		const map = {
+			Low: '🟢 Low',
+			Medium: '🟠 Medium',
+			High: '🔴 High',
+		};
+		return map[priority] || priority;
+	};
+
+	const getCategoryDisplay = (category) => {
+		const map = {
+			Work: '📁 Work',
+			Personal: '🏠 Personal',
+			Shopping: '🛒 Shopping',
+			Health: '🧑🏻‍⚕️ Health',
+			Ideas: '💡 Ideas',
+			Others: '💭 Others',
+		};
+		return map[category] || category;
+	};
 	return (
-		<div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white px-6 py-12 flex justify-center items-start">
-			<div className="w-full max-w-5xl space-y-8">
+		<div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white px-4 sm:px-6 py-12 flex justify-center items-start">
+			<div className="w-full max-w-xl space-y-8">
 				<TaskForm
 					tasks={tasks}
 					setTasks={setTasks}
@@ -71,6 +91,8 @@ const App = () => {
 					deleteTask={deleteTask}
 					editTask={editTask}
 					toggleComplete={toggleComplete}
+					getPriorityDisplay={getPriorityDisplay}
+					getCategoryDisplay={getCategoryDisplay}
 				/>
 			</div>
 		</div>

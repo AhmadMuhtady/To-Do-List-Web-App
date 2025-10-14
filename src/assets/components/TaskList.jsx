@@ -9,6 +9,8 @@ const TaskList = ({
 	deleteTask,
 	editTask,
 	toggleComplete,
+	getPriorityDisplay,
+	getCategoryDisplay,
 }) => {
 	if (tasks.length === 0) {
 		return (
@@ -39,6 +41,8 @@ const TaskList = ({
 							deleteTask={deleteTask}
 							editTask={editTask}
 							toggleComplete={toggleComplete}
+							getPriorityDisplay={getPriorityDisplay}
+							getCategoryDisplay={getCategoryDisplay}
 						/>
 					))}
 				</div>
