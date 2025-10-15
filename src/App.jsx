@@ -16,6 +16,7 @@ const App = () => {
 	const [tasks, setTasks] = useState([]);
 	const [isFormVisible, setIsFormVisible] = useState(false);
 	const [isTasksVisible, setIsTasksVisible] = useState(false);
+	const [isFilterVisible, setIsFilterVisible] = useState(false);
 	const [isEditing, setIsEditing] = useState(false);
 	const [editingTaskId, setEditingTaskId] = useState(null); // optional: track which task is being edited
 
@@ -93,6 +94,9 @@ const App = () => {
 					toggleComplete={toggleComplete}
 					getPriorityDisplay={getPriorityDisplay}
 					getCategoryDisplay={getCategoryDisplay}
+					taskForm={taskForm}
+					isFilterVisible={isFilterVisible}
+					setIsFilterVisible={setIsFilterVisible}
 				/>
 			</div>
 		</div>

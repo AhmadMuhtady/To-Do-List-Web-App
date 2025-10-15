@@ -1,5 +1,6 @@
 import Task from './Task';
 import Button from './Button';
+import FilterTasks from './FilterTasks';
 
 const TaskList = ({
 	tasks,
@@ -11,6 +12,9 @@ const TaskList = ({
 	toggleComplete,
 	getPriorityDisplay,
 	getCategoryDisplay,
+	taskForm,
+	setIsFilterVisible,
+	isFilterVisible,
 }) => {
 	if (tasks.length === 0) {
 		return (
@@ -33,19 +37,27 @@ const TaskList = ({
 			</Button>
 
 			{isTasksVisible && (
-				<div className="mt-6 space-y-4">
-					{tasks.map((task) => (
-						<Task
-							key={task.id}
-							task={task}
-							deleteTask={deleteTask}
-							editTask={editTask}
-							toggleComplete={toggleComplete}
-							getPriorityDisplay={getPriorityDisplay}
-							getCategoryDisplay={getCategoryDisplay}
-						/>
-					))}
-				</div>
+				<>
+					<FilterTasks
+						taskForm={taskForm}
+						setIsFilterVisible={setIsFilterVisible}
+						isFilterVisible={isFilterVisible}
+					/>
+
+					<div className="mt-6 space-y-4">
+						{tasks.map((task) => (
+							<Task
+								key={task.id}
+								task={task}
+								deleteTask={deleteTask}
+								editTask={editTask}
+								toggleComplete={toggleComplete}
+								getPriorityDisplay={getPriorityDisplay}
+								getCategoryDisplay={getCategoryDisplay}
+							/>
+						))}
+					</div>
+				</>
 			)}
 		</div>
 	);

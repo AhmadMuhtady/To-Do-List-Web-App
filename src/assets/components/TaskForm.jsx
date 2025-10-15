@@ -98,6 +98,7 @@ const TaskForm = ({
 							{ value: 'Medium', label: '🟠 Medium' },
 							{ value: 'High', label: '🔴 High' },
 						]}
+						className=""
 					/>
 
 					<SelectInput
