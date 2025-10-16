@@ -2,15 +2,18 @@ import SelectInput from './inputForm/SelectInput';
 import Button from './Button';
 import { useState } from 'react';
 
-const FilterTasks = ({ taskForm, isFilterVisible, setIsFilterVisible }) => {
-	const [filters, setFilters] = useState({
-		status: 'All',
-		priority: 'All',
-		category: 'All',
-	});
-
-	const handleFilterChange = () => {};
-
+const FilterTasks = ({
+	isFilterVisible,
+	setIsFilterVisible,
+	filters,
+	setFilters,
+}) => {
+	const handleFilterChange = (name, value) => {
+		setFilters({
+			...filters,
+			[name]: value,
+		});
+	};
 	return (
 		<div className="mt-3">
 			<Button
@@ -29,7 +32,7 @@ const FilterTasks = ({ taskForm, isFilterVisible, setIsFilterVisible }) => {
 			>
 				<div className="flex gap-2">
 					<Button onClick={() => handleFilterChange('status', 'All')}>
-						✅ All
+						🌐 All
 					</Button>
 					<Button onClick={() => handleFilterChange('status', 'Completed')}>
 						✅ Completed
@@ -40,11 +43,12 @@ const FilterTasks = ({ taskForm, isFilterVisible, setIsFilterVisible }) => {
 				</div>
 
 				<SelectInput
-					value={taskForm.priority}
+					value={filters.priority}
 					label="Priority"
 					name="priority"
 					onChange={(e) => handleFilterChange('priority', e.target.value)}
 					options={[
+						{ value: 'All', label: '🌐 All' },
 						{ value: 'Low', label: '🟢 Low' },
 						{ value: 'Medium', label: '🟠 Medium' },
 						{ value: 'High', label: '🔴 High' },
@@ -52,11 +56,12 @@ const FilterTasks = ({ taskForm, isFilterVisible, setIsFilterVisible }) => {
 				/>
 
 				<SelectInput
-					value={taskForm.category}
+					value={filters.category}
 					label="Category"
 					name="category"
 					onChange={(e) => handleFilterChange('category', e.target.value)}
 					options={[
+						{ value: 'All', label: '🌐 All' },
 						{ value: 'Work', label: '📁 Work' },
 						{ value: 'Personal', label: '🏠 Personal' },
 						{ value: 'Shopping', label: '🛒 Shopping' },
@@ -68,7 +73,9 @@ const FilterTasks = ({ taskForm, isFilterVisible, setIsFilterVisible }) => {
 
 				<Button
 					className="w-full bg-cyan-500 hover:bg-cyan-600 text-white font-semibold py-3 rounded-lg transition-all duration-300 shadow-md hover:shadow-xl"
-					onClick={() => handleFilterChange('clear')}
+					onClick={() =>
+						setFilters({ status: 'All', priority: 'All', category: 'All' })
+					}
 				>
 					🧹 Clear Filters
 				</Button>

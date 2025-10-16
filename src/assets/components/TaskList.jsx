@@ -15,6 +15,8 @@ const TaskList = ({
 	taskForm,
 	setIsFilterVisible,
 	isFilterVisible,
+	setFilters,
+	filters,
 }) => {
 	if (tasks.length === 0) {
 		return (
@@ -39,23 +41,41 @@ const TaskList = ({
 			{isTasksVisible && (
 				<>
 					<FilterTasks
-						taskForm={taskForm}
 						setIsFilterVisible={setIsFilterVisible}
 						isFilterVisible={isFilterVisible}
+						setFilters={setFilters}
+						filters={filters}
 					/>
 
 					<div className="mt-6 space-y-4">
-						{tasks.map((task) => (
-							<Task
-								key={task.id}
-								task={task}
-								deleteTask={deleteTask}
-								editTask={editTask}
-								toggleComplete={toggleComplete}
-								getPriorityDisplay={getPriorityDisplay}
-								getCategoryDisplay={getCategoryDisplay}
-							/>
-						))}
+						{tasks
+							.filter((task) => {
+								const passesStatus =
+									filters.status === 'All' ||
+									(filters.status === 'Completed' && task.completed) ||
+									(filters.status === 'Incomplete' && !task.completed);
+
+								const passesCategory =
+									filters.category === 'All' ||
+									filters.category === task.category;
+
+								const passesPriority =
+									filters.priority === 'All' ||
+									filters.priority === task.priority;
+
+								return passesStatus && passesCategory && passesPriority;
+							})
+							.map((task) => (
+								<Task
+									key={task.id}
+									task={task}
+									deleteTask={deleteTask}
+									editTask={editTask}
+									toggleComplete={toggleComplete}
+									getPriorityDisplay={getPriorityDisplay}
+									getCategoryDisplay={getCategoryDisplay}
+								/>
+							))}
 					</div>
 				</>
 			)}

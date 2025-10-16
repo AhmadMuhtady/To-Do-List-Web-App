@@ -68,6 +68,13 @@ const App = () => {
 		};
 		return map[category] || category;
 	};
+
+	const [filters, setFilters] = useState({
+		status: 'All',
+		priority: 'All',
+		category: 'All',
+	});
+
 	return (
 		<div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white px-4 sm:px-6 py-12 flex justify-center items-start">
 			<div className="w-full max-w-xl space-y-8">
@@ -97,6 +104,8 @@ const App = () => {
 					taskForm={taskForm}
 					isFilterVisible={isFilterVisible}
 					setIsFilterVisible={setIsFilterVisible}
+					filters={filters}
+					setFilters={setFilters}
 				/>
 			</div>
 		</div>
