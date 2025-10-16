@@ -1,6 +1,5 @@
 import SelectInput from './inputForm/SelectInput';
 import Button from './Button';
-import { useState } from 'react';
 
 const FilterTasks = ({
 	isFilterVisible,

@@ -1,7 +1,8 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 import TaskForm from './assets/components/TaskForm';
 import TaskList from './assets/components/TaskList';
+import Toast from './assets/components/Toast';
 
 const App = () => {
 	const topRef = useRef(null);
@@ -13,12 +14,17 @@ const App = () => {
 		description: '',
 		completed: false,
 	});
-	const [tasks, setTasks] = useState([]);
+	const [tasks, setTasks] = useState(() => {
+		const stored = localStorage.getItem('Tasks');
+		return stored ? JSON.parse(stored) : [];
+	});
 	const [isFormVisible, setIsFormVisible] = useState(false);
 	const [isTasksVisible, setIsTasksVisible] = useState(false);
 	const [isFilterVisible, setIsFilterVisible] = useState(false);
 	const [isEditing, setIsEditing] = useState(false);
 	const [editingTaskId, setEditingTaskId] = useState(null); // optional: track which task is being edited
+	const [showToast, setShowToast] = useState(false);
+	const [toastMessage, setToastMessage] = useState('');
 
 	const deleteTask = (id) => {
 		const confirm = window.confirm(
@@ -26,6 +32,8 @@ const App = () => {
 		);
 		if (confirm) {
 			setTasks(tasks.filter((task) => task.id !== id));
+			setToastMessage('🗑️ Task Deleted!');
+			setShowToast(true);
 		}
 	};
 
@@ -66,6 +74,7 @@ const App = () => {
 			Ideas: '💡 Ideas',
 			Others: '💭 Others',
 		};
+
 		return map[category] || category;
 	};
 
@@ -74,6 +83,14 @@ const App = () => {
 		priority: 'All',
 		category: 'All',
 	});
+
+	useEffect(() => {
+		localStorage.setItem('Tasks', JSON.stringify(tasks));
+		setToastMessage('💾 Tasks Saved!');
+		setShowToast(true);
+		const timer = setTimeout(() => setShowToast(false), 1300);
+		return () => clearTimeout(timer);
+	}, [tasks]);
 
 	return (
 		<div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white px-4 sm:px-6 py-12 flex justify-center items-start">
@@ -107,6 +124,8 @@ const App = () => {
 					filters={filters}
 					setFilters={setFilters}
 				/>
+
+				<Toast message={toastMessage} visible={showToast} />
 			</div>
 		</div>
 	);
