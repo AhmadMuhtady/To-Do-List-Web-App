@@ -2,7 +2,6 @@ import { useState, useRef, useEffect } from 'react';
 
 import TaskForm from './assets/components/TaskForm';
 import TaskList from './assets/components/TaskList';
-import Toast from './assets/components/Toast';
 
 const App = () => {
 	const topRef = useRef(null);
@@ -23,8 +22,6 @@ const App = () => {
 	const [isFilterVisible, setIsFilterVisible] = useState(false);
 	const [isEditing, setIsEditing] = useState(false);
 	const [editingTaskId, setEditingTaskId] = useState(null); // optional: track which task is being edited
-	const [showToast, setShowToast] = useState(false);
-	const [toastMessage, setToastMessage] = useState('');
 
 	const deleteTask = (id) => {
 		const confirm = window.confirm(
@@ -32,8 +29,6 @@ const App = () => {
 		);
 		if (confirm) {
 			setTasks(tasks.filter((task) => task.id !== id));
-			setToastMessage('🗑️ Task Deleted!');
-			setShowToast(true);
 		}
 	};
 
@@ -86,10 +81,6 @@ const App = () => {
 
 	useEffect(() => {
 		localStorage.setItem('Tasks', JSON.stringify(tasks));
-		setToastMessage('💾 Tasks Saved!');
-		setShowToast(true);
-		const timer = setTimeout(() => setShowToast(false), 1300);
-		return () => clearTimeout(timer);
 	}, [tasks]);
 
 	return (
@@ -124,8 +115,6 @@ const App = () => {
 					filters={filters}
 					setFilters={setFilters}
 				/>
-
-				<Toast message={toastMessage} visible={showToast} />
 			</div>
 		</div>
 	);
