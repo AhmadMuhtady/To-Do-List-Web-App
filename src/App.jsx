@@ -18,6 +18,7 @@ const App = () => {
 		return stored ? JSON.parse(stored) : [];
 	});
 	const [isFormVisible, setIsFormVisible] = useState(false);
+	const [isSortVisible, setIsSortVisible] = useState(false);
 	const [isTasksVisible, setIsTasksVisible] = useState(false);
 	const [isFilterVisible, setIsFilterVisible] = useState(false);
 	const [isEditing, setIsEditing] = useState(false);
@@ -114,6 +115,8 @@ const App = () => {
 					setIsFilterVisible={setIsFilterVisible}
 					filters={filters}
 					setFilters={setFilters}
+					isSortVisible={isSortVisible}
+					setIsSortVisible={setIsSortVisible}
 				/>
 			</div>
 		</div>

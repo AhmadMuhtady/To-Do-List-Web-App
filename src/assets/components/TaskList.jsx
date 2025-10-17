@@ -1,6 +1,10 @@
+import { useState } from 'react';
+
 import Task from './Task';
 import Button from './Button';
 import FilterTasks from './FilterTasks';
+import TextInputs from './inputForm/TextInputs';
+import SortTasks from './SortTasks';
 
 const TaskList = ({
 	tasks,
@@ -17,7 +21,14 @@ const TaskList = ({
 	isFilterVisible,
 	setFilters,
 	filters,
+	isSortVisible,
+	setIsSortVisible,
 }) => {
+	const [search, setSearch] = useState('');
+	const handleSearchChange = (e) => {
+		setSearch(e.target.value);
+	};
+
 	if (tasks.length === 0) {
 		return (
 			<p className="text-center text-white/90 text-sm mt-2 mb-3 leading-relaxed">
@@ -40,11 +51,22 @@ const TaskList = ({
 
 			{isTasksVisible && (
 				<>
-					<FilterTasks
-						setIsFilterVisible={setIsFilterVisible}
-						isFilterVisible={isFilterVisible}
-						setFilters={setFilters}
-						filters={filters}
+					<div className="flex flex-wrap items-start justify-start gap-4 mb-4">
+						<FilterTasks
+							setIsFilterVisible={setIsFilterVisible}
+							isFilterVisible={isFilterVisible}
+							setFilters={setFilters}
+							filters={filters}
+						/>
+						<SortTasks
+							isSortVisible={isSortVisible}
+							setIsSortVisible={setIsSortVisible}
+						/>
+					</div>
+					<TextInputs
+						onChange={handleSearchChange}
+						label="Search"
+						name="search"
 					/>
 
 					<div className="mt-6 space-y-4">
@@ -63,7 +85,16 @@ const TaskList = ({
 									filters.priority === 'All' ||
 									filters.priority === task.priority;
 
-								return passesStatus && passesCategory && passesPriority;
+								const matchesSearch =
+									task.title.toLowerCase().includes(search.toLowerCase()) ||
+									task.description.toLowerCase().includes(search.toLowerCase());
+
+								return (
+									passesStatus &&
+									passesCategory &&
+									passesPriority &&
+									matchesSearch
+								);
 							})
 							.map((task) => (
 								<Task
