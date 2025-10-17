@@ -36,6 +36,7 @@ const TaskList = ({
 			</p>
 		);
 	}
+
 	return (
 		<div className="bg-white/5 backdrop-blur-md rounded-xl p-8 shadow-lg border border-white/10">
 			<h2 className="text-3xl font-bold text-center text-magenta-400 mb-6">
@@ -51,24 +52,58 @@ const TaskList = ({
 
 			{isTasksVisible && (
 				<>
-					<div className="flex flex-wrap items-start justify-start gap-4 mb-4">
-						<FilterTasks
-							setIsFilterVisible={setIsFilterVisible}
-							isFilterVisible={isFilterVisible}
-							setFilters={setFilters}
-							filters={filters}
-						/>
-						<SortTasks
-							isSortVisible={isSortVisible}
-							setIsSortVisible={setIsSortVisible}
-						/>
+					{/* Control Buttons Row */}
+					<div className="flex flex-wrap items-center gap-4 mt-6 mb-2">
+						<Button
+							className="px-4 py-2 rounded-lg bg-gradient-to-r from-pink-500 to-purple-600 text-white font-semibold shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300"
+							onClick={() => {
+								setIsFilterVisible(!isFilterVisible);
+								setIsSortVisible(false);
+							}}
+						>
+							{isFilterVisible ? 'Hide Filter' : 'Filters'}
+						</Button>
+
+						<Button
+							className="px-4 py-2 rounded-lg bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300"
+							onClick={() => {
+								setIsSortVisible(!isSortVisible);
+								setIsFilterVisible(false);
+							}}
+						>
+							{isSortVisible ? 'Hide Sort' : 'Sort'}
+						</Button>
 					</div>
+
+					{/* Panels Below Buttons */}
+					{isFilterVisible && (
+						<div className="transition-all duration-300">
+							<FilterTasks
+								setIsFilterVisible={setIsFilterVisible}
+								isFilterVisible={isFilterVisible}
+								setFilters={setFilters}
+								filters={filters}
+							/>
+						</div>
+					)}
+
+					{isSortVisible && (
+						<div className="transition-all duration-300">
+							<SortTasks
+								isSortVisible={isSortVisible}
+								setIsSortVisible={setIsSortVisible}
+							/>
+						</div>
+					)}
+
+					{/* Search Input */}
 					<TextInputs
 						onChange={handleSearchChange}
 						label="Search"
 						name="search"
 					/>
 
+					{/* Task List */}
 					<div className="mt-6 space-y-4">
 						{tasks
 							.filter((task) => {

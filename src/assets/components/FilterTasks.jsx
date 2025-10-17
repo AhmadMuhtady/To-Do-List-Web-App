@@ -14,14 +14,7 @@ const FilterTasks = ({
 		});
 	};
 	return (
-		<div className="mt-3">
-			<Button
-				className="px-4 py-2 rounded-lg bg-gradient-to-r from-pink-500 to-purple-600 text-white font-semibold shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300"
-				onClick={() => setIsFilterVisible(!isFilterVisible)}
-			>
-				{isFilterVisible ? 'Hide Filter' : 'Filters'}
-			</Button>
-
+		<div className="mt-3 w-full">
 			<div
 				className={`transition-transform duration-500 ease-in-out origin-top overflow-hidden ${
 					isFilterVisible
