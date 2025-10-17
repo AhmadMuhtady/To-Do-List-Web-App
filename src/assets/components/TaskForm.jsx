@@ -18,6 +18,7 @@ const TaskForm = ({
 	editingTaskId,
 	setEditingTaskId,
 	topRef,
+	getFormattedDateTime,
 }) => {
 	const taskIdRef = useRef(null);
 	const handleFormChange = (e) => {
@@ -52,6 +53,7 @@ const TaskForm = ({
 			category: 'Work',
 			description: '',
 			completed: false,
+			createdAt: getFormattedDateTime(),
 		});
 		setIsEditing(false);
 		setEditingTaskId(null);

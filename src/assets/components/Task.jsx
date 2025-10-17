@@ -7,6 +7,7 @@ const Task = ({
 	toggleComplete,
 	getPriorityDisplay,
 	getCategoryDisplay,
+	getFormattedDateTime,
 }) => {
 	return (
 		<div
@@ -26,6 +27,10 @@ const Task = ({
 						{task.title}
 					</span>
 				</div>
+				<span className="text-sm px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-300">
+					{task.createdAt}
+				</span>
+
 				<span className="text-sm px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-300">
 					{getPriorityDisplay(task.priority)}
 				</span>

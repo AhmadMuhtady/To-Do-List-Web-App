@@ -23,6 +23,7 @@ const TaskList = ({
 	filters,
 	isSortVisible,
 	setIsSortVisible,
+	getFormattedDateTime,
 }) => {
 	const [search, setSearch] = useState('');
 	const handleSearchChange = (e) => {
@@ -92,6 +93,7 @@ const TaskList = ({
 							<SortTasks
 								isSortVisible={isSortVisible}
 								setIsSortVisible={setIsSortVisible}
+								getFormattedDateTime={getFormattedDateTime}
 							/>
 						</div>
 					)}
@@ -140,6 +142,7 @@ const TaskList = ({
 									toggleComplete={toggleComplete}
 									getPriorityDisplay={getPriorityDisplay}
 									getCategoryDisplay={getCategoryDisplay}
+									getFormattedDateTime={getFormattedDateTime}
 								/>
 							))}
 					</div>

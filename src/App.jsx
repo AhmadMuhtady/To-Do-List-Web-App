@@ -5,6 +5,18 @@ import TaskList from './assets/components/TaskList';
 
 const App = () => {
 	const topRef = useRef(null);
+	const getFormattedDateTime = (date = new Date()) => {
+		const d = date.toLocaleString('en-US', {
+			day: '2-digit',
+			month: 'short',
+			year: 'numeric',
+			hour: '2-digit',
+			minute: '2-digit',
+			hour12: false,
+		});
+		return `Task created at ${d.replace(',', ' -').replace(',', ' at')}`;
+	};
+
 	const [taskForm, setTaskForm] = useState({
 		title: '',
 		dueDate: '',
@@ -12,6 +24,7 @@ const App = () => {
 		category: 'Work',
 		description: '',
 		completed: false,
+		createdAt: getFormattedDateTime(),
 	});
 	const [tasks, setTasks] = useState(() => {
 		const stored = localStorage.getItem('Tasks');
@@ -99,6 +112,7 @@ const App = () => {
 					editingTaskId={editingTaskId}
 					topRef={topRef}
 					setEditingTaskId={setEditingTaskId}
+					getFormattedDateTime={getFormattedDateTime}
 				/>
 				<TaskList
 					tasks={tasks}
@@ -117,6 +131,7 @@ const App = () => {
 					setFilters={setFilters}
 					isSortVisible={isSortVisible}
 					setIsSortVisible={setIsSortVisible}
+					getFormattedDateTime={getFormattedDateTime}
 				/>
 			</div>
 		</div>
