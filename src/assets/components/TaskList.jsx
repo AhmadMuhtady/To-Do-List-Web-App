@@ -24,6 +24,8 @@ const TaskList = ({
 	isSortVisible,
 	setIsSortVisible,
 	getFormattedDateTime,
+	sort,
+	setSort,
 }) => {
 	const [search, setSearch] = useState('');
 	const handleSearchChange = (e) => {
@@ -37,6 +39,38 @@ const TaskList = ({
 			</p>
 		);
 	}
+
+	const handleSort = (tasks, sortBy, sortOrder) => {
+		const sorted = [...tasks];
+
+		switch (sortBy) {
+			case 'date':
+				sorted.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+				break;
+			case 'priority':
+				const priorityMap = { High: 3, Medium: 2, Low: 1 };
+				sorted.sort(
+					(a, b) => priorityMap[b.priority] - priorityMap[a.priority]
+				);
+				break;
+			case 'title':
+				sorted.sort((a, b) => a.title.localeCompare(b.title));
+				break;
+			case 'completed':
+				sorted.sort((a, b) => Number(a.completed) - Number(b.completed));
+				break;
+			case 'created':
+				sorted.sort(
+					(a, b) => new Date(b.dateCreated) - new Date(a.dateCreated)
+				);
+				break;
+			default:
+				break;
+		}
+		if (sortOrder === 'desc') sorted.reverse();
+
+		return sorted;
+	};
 
 	return (
 		<div className="bg-white/5 backdrop-blur-md rounded-xl p-8 shadow-lg border border-white/10">
@@ -94,6 +128,8 @@ const TaskList = ({
 								isSortVisible={isSortVisible}
 								setIsSortVisible={setIsSortVisible}
 								getFormattedDateTime={getFormattedDateTime}
+								sort={sort}
+								setSort={setSort}
 							/>
 						</div>
 					)}
@@ -107,7 +143,7 @@ const TaskList = ({
 
 					{/* Task List */}
 					<div className="mt-6 space-y-4">
-						{tasks
+						{handleSort(tasks, sort.sortBy, sort.sortOrder)
 							.filter((task) => {
 								const passesStatus =
 									filters.status === 'All' ||

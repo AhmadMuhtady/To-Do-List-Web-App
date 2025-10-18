@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, use } from 'react';
 
 import TaskForm from './assets/components/TaskForm';
 import TaskList from './assets/components/TaskList';
@@ -25,6 +25,7 @@ const App = () => {
 		description: '',
 		completed: false,
 		createdAt: getFormattedDateTime(),
+		dateCreated: Date.now(),
 	});
 	const [tasks, setTasks] = useState(() => {
 		const stored = localStorage.getItem('Tasks');
@@ -36,7 +37,10 @@ const App = () => {
 	const [isFilterVisible, setIsFilterVisible] = useState(false);
 	const [isEditing, setIsEditing] = useState(false);
 	const [editingTaskId, setEditingTaskId] = useState(null); // optional: track which task is being edited
-
+	const [sort, setSort] = useState({
+		sortBy: 'priority',
+		sortOrder: 'asc',
+	});
 	const deleteTask = (id) => {
 		const confirm = window.confirm(
 			'Are you sure you want to DELETE this Task?'
@@ -132,6 +136,8 @@ const App = () => {
 					isSortVisible={isSortVisible}
 					setIsSortVisible={setIsSortVisible}
 					getFormattedDateTime={getFormattedDateTime}
+					sort={sort}
+					setSort={setSort}
 				/>
 			</div>
 		</div>

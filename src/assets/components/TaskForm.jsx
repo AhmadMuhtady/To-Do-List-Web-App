@@ -54,6 +54,7 @@ const TaskForm = ({
 			description: '',
 			completed: false,
 			createdAt: getFormattedDateTime(),
+			dateCreated: Date.now(),
 		});
 		setIsEditing(false);
 		setEditingTaskId(null);
