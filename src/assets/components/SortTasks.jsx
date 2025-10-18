@@ -35,7 +35,7 @@ const SortTasks = ({ isSortVisible, setIsSortVisible, sort, setSort }) => {
 			case 'completed':
 				return active
 					? order === 'asc'
-						? '✖️ Incomplete First'
+						? '✅ Incomplete First'
 						: '✅ Done First'
 					: '✅ Completion';
 			case 'title':
